@@ -213,7 +213,7 @@ The following explains why Bayesian inference is better:
 ### Tutorials
 * [A small tutorial from the scmamp repository.](https://github.com/b0rxa/scmamp/tree/master/vignettes)
 
-# References
+## References
 * Benavoli, A., Corani, G., Mangili, F., Zaffalon, M., & Ruggeri, F. (2014, June). A Bayesian Wilcoxon signed-rank test
   based on the Dirichlet process. In_International conference on machine learning_(pp. 1026-1034). PMLR. 
   [https://people.idsia.ch/~alessio/benavoli2014a.pdf](https://people.idsia.ch/~alessio/benavoli2014a.pdf)
