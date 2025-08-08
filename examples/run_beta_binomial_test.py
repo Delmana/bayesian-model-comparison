@@ -1,3 +1,5 @@
+import os
+from datetime import datetime
 import numpy as np
 from utils.helper import load_results
 from bayesian_test.BayesianBetaBinomialTest import BayesianBetaBinomialTest
@@ -52,8 +54,14 @@ def main():
     # Run the example of a Bayesian Non-Negative Bimodal
     example_01(seed)
 
+    now = datetime.now()
+    folder_name = now.strftime("%y%m%d_%H%M") 
+    result_path = os.path.join('examples/results/bayesian_beta_binomial_test', folder_name)
+
     # Load saved results from example01
-    results = load_results(file_path='examples/results/bayesian_beta_binomial_test/250805_1727', file_name='example01')
+    results = load_results(file_path=result_path, file_name='example01')
+  
+    #results = load_results(file_path='examples/results/bayesian_beta_binomial_test/250805_1727', file_name='example01')
     print(results['posterior_probabilities'])
 
 
