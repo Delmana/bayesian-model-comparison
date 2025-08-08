@@ -60,7 +60,7 @@ export PYTHONPATH="/path/to/your/project:$PYTHONPATH"
 To test that everything is working, run the example script:
 
 ```bash
-python run examples/run_beta_binomial_test.py
+python examples/run_beta_binomial_test.py --run
 ```
 
 
