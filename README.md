@@ -133,7 +133,7 @@ if __name__ == '__main__':
     main()  # Execute the main function
 
 ```
-More examples can be found in the [examples folder]().
+More examples can be found in the [examples folder](https://github.com/NeeleKemper/bayesian-model-comparison/tree/main/examples).
 
 ## Motivation
 Performance comparisons between two or more machine learning algorithms are essential to determine the most effective model for a given task. Evaluating the actual performance distribution of these algorithms requires statistical assessments to ensure that the observed differences are not due to random variation but reflect real differences in performance. This evaluation is critical to making informed decisions about which algorithms should be used in real-world applications.
