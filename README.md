@@ -205,7 +205,7 @@ The following explains why Bayesian inference is better:
 
 ### Helpful Videos
 
-** An Introduction to the Main Idea of Bayesian Statistics
+**An Introduction to the Main Idea of Bayesian Statistics
 * ritvikmath. (20121). What the Heck is Bayesian Stats ?? : Data Science Basics. YouTube. [https://www.youtube.com/@ritvikmath](https://www.youtube.com/watch?v=-1dYY43DRMA&list=PLvcbYUQ5t0UEkf2NUEo7XSsyVTyeEk3Gq)
 
 **A video series for an easy introduction to Bayesian Data Analysis:**
