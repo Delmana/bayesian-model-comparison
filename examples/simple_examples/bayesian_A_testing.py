@@ -14,7 +14,7 @@ n_draws = 100000
 n = 16
 
 # Number of observed "yes" responses
-observed_data = 6
+observed_data = 10
 
 # Here you sample n_draws draws from the prior into a pandas Series
 # (to have convenient methods available for historgrams and descriptive statistics) 
@@ -73,14 +73,14 @@ fig, axes = plt.subplots(1, 2, figsize=(10, 4))
 
 # Left histogram – Frequency
 axes[0].hist(posterior, bins=10)
-axes[0].set_title(f"Posterior of p | X = {observed_data}")
+axes[0].set_title(f"Posterior of Method B | X = {observed_data}")
 axes[0].set_xlabel("p")
 axes[0].set_ylabel("Frequency")
 axes[0].grid(True)
 
 # Right histogram – Probability (relative frequency)
 axes[1].hist(posterior, bins=10, weights=np.ones_like(posterior) / len(posterior))
-axes[1].set_title("Posterior rate of sign up")
+axes[1].set_title(f"Posterior rate of sign up of Method B | X = {observed_data}")
 axes[1].set_xlabel("Posterior rate of sign up")
 axes[1].set_ylabel("Probability")
 axes[1].grid(True)
