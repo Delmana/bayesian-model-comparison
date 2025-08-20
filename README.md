@@ -219,7 +219,7 @@ The following explains why Bayesian inference is better:
 * [A small tutorial from the scmamp repository.](https://github.com/b0rxa/scmamp/tree/master/vignettes)
 
 
-### ShareLatex Dokument
+### ShareLatex Dokument: Bayesian Tutorial
 The document provides a comprehensive overview of the advantages of Bayesian analysis, introduces the fundamental concepts underlying the Bayesian approach, and presents a range of Bayesian methods as powerful alternatives to traditional null hypothesis significance testing (NHST).
 * [Bayesian Data Analysis](https://sharelatex.tu-darmstadt.de/read/sfccpkjttxry#e25719)
 
