@@ -218,6 +218,11 @@ The following explains why Bayesian inference is better:
 ### Tutorials
 * [A small tutorial from the scmamp repository.](https://github.com/b0rxa/scmamp/tree/master/vignettes)
 
+
+### ShareLatex Dokument
+The document provides a comprehensive overview of the advantages of Bayesian analysis, introduces the fundamental concepts underlying the Bayesian approach, and presents a range of Bayesian methods as powerful alternatives to traditional null hypothesis significance testing (NHST).
+* [Bayesian Data Analysis](https://sharelatex.tu-darmstadt.de/read/sfccpkjttxry#e25719)
+
 ## References
 * Benavoli, A., Corani, G., Mangili, F., Zaffalon, M., & Ruggeri, F. (2014, June). A Bayesian Wilcoxon signed-rank test
   based on the Dirichlet process. In_International conference on machine learning_(pp. 1026-1034). PMLR. 
