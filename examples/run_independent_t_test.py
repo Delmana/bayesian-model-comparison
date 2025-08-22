@@ -53,17 +53,33 @@ def example_01(seed: int) -> None:
 
 def main():
     seed = 42  # Set the random seed for reproducibility
-
-    # Set the random seed for NumPy
     np.random.seed(seed)
 
     # Run the example of a Bayesian Independent T-Test
     example_01(seed)
 
-    # Load saved results from example01
-    results = load_results(file_path='examples/results/bayesian_independent_t_test/250805_1824', file_name='example01')
-    for key in ['difference_mean', 'difference_sigma', 'effect_size', 'mu1', 'mu2', 'sigma1', 'sigma2', 'nu']:
-        print(f'{key}: {results[key]["posterior_probabilities"]}')
+    # Auto-detect the latest timestamp folder and load results
+    base_dir = 'examples/results/bayesian_independent_t_test'
+    try:
+        subdirs = [
+            os.path.join(base_dir, d)
+            for d in os.listdir(base_dir)
+            if os.path.isdir(os.path.join(base_dir, d))
+        ]
+        if not subdirs:
+            raise FileNotFoundError(f"No result subfolders found in '{base_dir}'.")
+
+        latest_dir = max(subdirs, key=os.path.getmtime)
+        print(f"[INFO] Loading results from: {latest_dir}/example01.pickle")
+
+        results = load_results(file_path=latest_dir, file_name='example01')
+        for key in ['difference_mean', 'difference_sigma', 'effect_size',
+                    'mu1', 'mu2', 'sigma1', 'sigma2', 'nu']:
+            print(f"{key}: {results[key]['posterior_probabilities']}")
+
+    except Exception as e:
+        print(f"[WARN] Could not load results automatically: {e}")
+        print("Tip: verify that 'example_01' saved results and the file name is 'example01.pickle'.")
 
 
 if __name__ == '__main__':

@@ -151,46 +151,59 @@ class AbstractBayesian(ABC):
         return summary
 
     def fit(self, iter_sampling: int = 50000, iter_warmup: int = 1000, chains: int = 4, **kwargs) -> None:
-        """
-        Fit the Stan model using MCMC sampling.
+            """
+            Fit the Stan model using MCMC sampling.
 
-        :param iter_sampling: Number of draws from the posterior for each chain. Default is 50000
-        :param iter_warmup: Number of warmup iterations for each chain. Default is 1000
-        :param chains: Number of sampler chains, must be a positive integer. Default is 4
-        :param kwargs: Additional keyword arguments for the sampling. See https://mc-stan.org/cmdstanpy/api.html#cmdstanmodel
-        :return: None
-        """
-        assert iter_sampling > 0, 'Number of sampling iterations must be positive!'
-        assert iter_warmup > 0, 'Number of warmup iterations must be positive!'
-        assert chains > 0, 'Number of sampler chains must be positive!'
+            :param iter_sampling: Number of draws from the posterior for each chain. Default is 50000
+            :param iter_warmup: Number of warmup iterations for each chain. Default is 1000
+            :param chains: Number of sampler chains, must be a positive integer. Default is 4
+            :param kwargs: Additional keyword arguments for the sampling. 
+                        See https://mc-stan.org/cmdstanpy/api.html#cmdstanmodel
+            :return: None
+            """
+            assert iter_sampling > 0, 'Number of sampling iterations must be positive!'
+            assert iter_warmup > 0, 'Number of warmup iterations must be positive!'
+            assert chains > 0, 'Number of sampler chains must be positive!'
 
-        self.iter_sampling = iter_sampling
-        self.iter_warmup = iter_warmup
-        self.chains = chains
-        if kwargs:
-            self.sampling_parameters = kwargs
-        # Adjust data for the Stan model
-        self._data = self._transform_data()
+            self.iter_sampling = iter_sampling
+            self.iter_warmup = iter_warmup
+            self.chains = chains
+            if kwargs:
+                self.sampling_parameters = kwargs
 
-        # Load the Stan program code
-        program_code = f'{STAN_FILES_FOLDER}/{self._stan_file}'
+            # Adjust data for the Stan model
+            self._data = self._transform_data()
 
-        # Build and compile the Stan model
-        self._posterior_model: cmdstanpy.CmdStanModel = cmdstanpy.CmdStanModel(stan_file=program_code)
+            # Load the Stan program code
+            program_code = f'{STAN_FILES_FOLDER}/{self._stan_file}'
 
-        # Fit the model using MCMC sampling
-        self._fit: cmdstanpy.CmdStanMCMC = self._posterior_model.sample(data=self._data,
-                                                                        iter_sampling=self.iter_sampling,
-                                                                        iter_warmup=self.iter_warmup,
-                                                                        chains=self.chains,
-                                                                        seed=self.seed,
-                                                                        show_console=False,
-                                                                        **kwargs)
+            # Build and compile the Stan model
+            self._posterior_model: cmdstanpy.CmdStanModel = cmdstanpy.CmdStanModel(stan_file=program_code)
 
-        # Convert the Stan fit to an Arviz InferenceData object
-        self.inf_data: az.InferenceData = az.from_cmdstanpy(posterior=self._fit)
+            # --- handle common sampling args to avoid duplicates ---
+            adapt_delta   = kwargs.pop('adapt_delta', None)
+            max_treedepth = kwargs.pop('max_treedepth', None)
+            show_console  = kwargs.pop('show_console', False)
 
-        # Run convergence checks
-        print(f'{datetime.now().time().strftime("%H:%M:%S")} - '
-              f'INFO: Running convergence diagnose on the inference data.')
-        print(self._fit.diagnose())
+            # Fit the model using MCMC sampling
+            self._fit: cmdstanpy.CmdStanMCMC = self._posterior_model.sample(
+                data=self._data,
+                iter_sampling=self.iter_sampling,
+                iter_warmup=self.iter_warmup,
+                chains=self.chains,
+                seed=self.seed,
+                show_console=show_console,
+                adapt_delta=adapt_delta,
+                max_treedepth=max_treedepth,
+                **kwargs
+            )
+
+            # Convert the Stan fit to an Arviz InferenceData object
+            self.inf_data: az.InferenceData = az.from_cmdstanpy(posterior=self._fit)
+
+            # Run convergence checks
+            print(f'{datetime.now().time().strftime("%H:%M:%S")} - '
+                f'INFO: Running convergence diagnose on the inference data.')
+            print(self._fit.diagnose())
+
+

@@ -444,7 +444,7 @@ def plot_posterior_predictive_check(inf_data: az.InferenceData, variables: list[
 
     # Create subplots: 3 rows for different kinds of plots and n_var columns for each variable
     n_var = len(variables)
-    fig, axes = plt.subplots(3, n_var, figsize=(5 * n_var, 10))
+    fig, axes = plt.subplots(3, n_var, figsize=(5 * n_var, 10), squeeze=False)
 
     # KDE plot for each variable
     ax = [axes[0, i] for i in range(n_var)]
