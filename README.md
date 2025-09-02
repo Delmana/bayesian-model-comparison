@@ -19,6 +19,7 @@ The models implemented in this repository are listed below:
 | **Bayesian Non-Negative Unimodal Test** (von Pilchau et al., 2023) | 2                | ≥ 1                    | Independent                                                                    | No – single Gamma (or Log-Normal) likelihood; optional right-censoring                                                 | Simpler sibling of the bimodal model: assumes a single, positively skewed mode. Well-suited to latency or cost data that are strictly positive and unimodal; supports censoring (timeout runs) by truncating the likelihood and updating the posterior accordingly.                                                         |
 | **Bayesian Plackett-Luce Ranking Model** (Calvo et al., 2019)      | 2 +              | Multiple               | Independent rankings           | Yes – worth parameters follow a Dirichlet prior; ranking likelihood is PL                                              | Converts per-dataset performance tables into rankings and fits a PL model, yielding posterior “worth” scores for every algorithm. Delivers probabilities such as *P(alg i is best)* or pairwise win probabilities, and naturally handles any number of algorithms, ties, or missing results.                                |
 | **Bayesian Wilcoxon Signed-Rank Test** (Benavoli et al., 2014)     | 2                | ≥ 1                    | Paired – independent **or** correlated                                         | Non-parametric (Dirichlet-process prior on the CDF of differences)                                                     | Replaces the deterministic ranking of classical Wilcoxon with a DP mixture, giving a full posterior for the median paired difference. Provides *P(A $\approx$ B)* as well as loss-minimising decisions, while retaining Wilcoxon’s robustness to non-normal, heavy-tailed, or ordinal data.                                 |
+| **Bayesian One-Way ANOVA** (Kruschke, 2015) | ≥ 2 groups | 1 dataset with categorical grouping | Continuous outcomes grouped by factor (hierarchical partial pooling) | Robust Student-t likelihood for observations; Normal prior on group means with hyperprior on overall mean/variance; no equal-variance or normality assumption required | Provides posterior distributions for group means, pairwise differences, and variance explained (η²). Handles unequal variances and heavy-tailed data via Student-t likelihood. Delivers intuitive quantities such as P(μᵢ > μⱼ) and ROPE probabilities, with credible intervals that contract as evidence accumulates. |
 
 
 
@@ -207,7 +208,7 @@ The following explains why Bayesian inference is better:
 
 ### Helpful Videos
 
-**An Introduction to the Main Idea of Bayesian Statistics
+**An Introduction to the Main Idea of Bayesian Statistics**
 * ritvikmath. (20121). What the Heck is Bayesian Stats ?? : Data Science Basics. YouTube. [https://www.youtube.com/@ritvikmath](https://www.youtube.com/watch?v=-1dYY43DRMA&list=PLvcbYUQ5t0UEkf2NUEo7XSsyVTyeEk3Gq)
 
 **A video series for an easy introduction to Bayesian Data Analysis:**
