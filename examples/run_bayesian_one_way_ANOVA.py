@@ -40,10 +40,10 @@ def example_anova(seed: int) -> dict:
         save=True,
         round_to=3,
         directory_path='examples/results',
-        file_path='bayesian_one_way_anova',  # sorgt für Ordnerstruktur wie bei den Plots
+        file_path='bayesian_one_way_anova',  
     )
 
-    # Speichern der Ergebnisse im gleichen Zeitstempel-Ordner wie die Plots
+    # Save the results in the same timestamp folder as the plots
     out_dir = f"examples/results/bayesian_one_way_anova/{model._execution_time}"
     save_results(results, out_dir, "example_anova")
 
@@ -54,11 +54,11 @@ def main():
     seed = 42
     np.random.seed(seed)
 
-    # Run ANOVA example (führt Fit, Analyse, Speichern aus)
+    # Run ANOVA example (performs fit, analysis, save)
     run_out = example_anova(seed)
     out_dir = run_out["out_dir"]
 
-    # Ergebnisse aus Datei laden (kein Hardcoding des Zeitstempels mehr)
+    # Load results from file (no more hardcoding of timestamp)
     loaded = load_results(file_path=out_dir, file_name="example_anova")
 
     # Print some key results

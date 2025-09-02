@@ -60,10 +60,10 @@ def example_multifactor_anova(seed: int) -> dict:
         seed=seed,
     )
 
-    # Fit model (gleiche Parameternamen wie im One-Way-Beispiel)
+    # Fit model (same parameter names as in the one-way example)
     model.fit(iter_sampling=5000, iter_warmup=1000, chains=4)
 
-    # Analyse results (gleiche Struktur & Pfade wie im One-Way-Beispiel)
+    # Analysis results (same structure & paths as in the one-way example)
     results = model.analyse(
         posterior_predictive_check=True,
         file_name='example_multifactor_anova',
@@ -71,10 +71,10 @@ def example_multifactor_anova(seed: int) -> dict:
         save=True,
         round_to=3,
         directory_path='examples/results',
-        file_path='bayesian_multifactor_anova',  # sorgt für Ordnerstruktur wie bei den Plots
+        file_path='bayesian_multifactor_anova', 
     )
 
-    # Speichern der Ergebnisse im gleichen Zeitstempel-Ordner wie die Plots
+    # Save the results in the same timestamp folder as the plots
     out_dir = f"examples/results/bayesian_multifactor_anova/{model._execution_time}"
     save_results(results, out_dir, "example_multifactor_anova")
 
@@ -85,11 +85,11 @@ def main():
     seed = 42
     np.random.seed(seed)
 
-    # Run Multifactor ANOVA example (führt Fit, Analyse, Speichern aus)
+    # Run Multifactor ANOVA example (performs fit, analysis, save)
     run_out = example_multifactor_anova(seed)
     out_dir = run_out["out_dir"]
 
-    # Ergebnisse aus Datei laden (kein Hardcoding des Zeitstempels)
+    # Load results from file (no hardcoding of timestamp)
     loaded = load_results(file_path=out_dir, file_name="example_multifactor_anova")
 
     # Print some key results
