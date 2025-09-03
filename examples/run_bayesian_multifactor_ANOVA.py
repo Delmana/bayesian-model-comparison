@@ -56,7 +56,8 @@ def example_multifactor_anova(seed: int) -> dict:
         factors=factors,
         include_interactions=True,
         rope_main={"A": (-0.1, 0.1), "B": (-0.1, 0.1)},  # ROPE for marginal mean diffs
-        rope_cell=None,
+        #rope_cell=None,
+        rope_cell=(-0.1, 0.1),  # ROPE for cell mean differences (Δμ of A×B cells)
         seed=seed,
     )
 
