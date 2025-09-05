@@ -8,7 +8,7 @@ Accepted input formats:
 Usage:
   python examples/simple_examples/bayesian_independent_tTest.py \
     --csv examples/simple_examples/data/t_test_example.csv \
-    --group1 Group1 --group2 Group2 \
+    --group1 Control --group2 Meditation \
     --rope -0.2 0.2 --iter 4000 --warmup 1000 --chains 4 \
     --ppc --plot
 
